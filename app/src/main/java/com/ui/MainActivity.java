@@ -59,14 +59,15 @@ public class MainActivity extends AppCompatActivity {
     private Peoples peoples;
     private ViewModelFirebase viewModelFirebase;
     private RecyclerViewFirebase recyclerViewFirebase;
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         // get Posts
         viewModel = ViewModelProviders.of(this).get(ViewModel.class);
-        binding.recyclerView.setHasFixedSize(true);
         viewModel.getPosts();
+        binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewPosts = new RecyclerViewPosts();
         binding.recyclerView.setAdapter(recyclerViewPosts);
@@ -124,8 +125,31 @@ public class MainActivity extends AppCompatActivity {
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(Schedulers.computation())
 //                .subscribe(c->Log.d(TAG,"momo downStraem: "+c+"current thread "+ Thread.currentThread().getName()));
+//        Observable.create(new ObservableOnSubscribe<Object>() {
+//            @Override
+//            public void subscribe(ObservableEmitter<Object> e) throws Exception {
+//               getDataApi(e);
+//            }
+//        }).doOnNext(i->Log.d(TAG,"momo upStraem:"+i))
+//                .flatMap(new Function<Object, ObservableSource<?>>() {
+//                    @Override
+//                    public ObservableSource<?> apply(Object o) throws Exception {
+//                        return getDataApi(o.toString());
+//                    }
+//                })
+//                .subscribe(c->{
+//                    Log.d(TAG,"momo downStraem: "+c);
+//                });
 
     }
+//    private Observable getDataApi(Object o){
+//        Observable observable = Observable.just("momo hahahah"+o);
+//        observable.subscribe(x->{
+//            Log.d(TAG,"momo api: "+x);
+//            viewModel.getPosts();
+//        });
+//        return observable;
+//    }
 
     private void sleep(int i){
         try {
