@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="people"
             type="com.models.Peoples" />
+
         <variable
             name="onClickMainHandler"
             type="com.ui.MainActivity.Handler" />
@@ -14,8 +16,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context="com.ui.MainActivity">
 
         <EditText
@@ -24,26 +26,30 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:hint="First Name"
-            android:textColorHint="#000"
-            android:text="@{people.firstName}"/>
+            android:text="@{people.firstName}"
+            android:textColorHint="#000" />
+
         <EditText
             android:id="@+id/editText_lastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:hint="Last Name"
-            android:textColorHint="#000"
-            android:text="@{people.lastName}"/>
+            android:text="@{people.lastName}"
+            android:textColorHint="#000" />
+
         <Button
             android:id="@+id/button_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:onClick="@{onClickMainHandler :: setData}"
-            android:text="save"/>
-         <androidx.recyclerview.widget.RecyclerView
-         android:id="@+id/recyclerView"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"/>
+            android:text="save" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </layout>

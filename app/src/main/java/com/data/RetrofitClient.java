@@ -4,8 +4,11 @@ import com.models.Posts;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
@@ -17,6 +20,7 @@ public class RetrofitClient {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         iposts = retrofit.create(Iposts.class);
     }
@@ -28,7 +32,7 @@ public class RetrofitClient {
         return INSTANCE;
     }
 
-    public Call<List<Posts>> getPosts() {
+    public Single<List<Posts>> getPosts() {
         return iposts.getPosts();
     }
 }
